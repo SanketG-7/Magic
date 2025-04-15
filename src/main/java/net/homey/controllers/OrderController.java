@@ -34,10 +34,22 @@ import java.util.Optional;
             return ResponseEntity.ok(orderService.getAllOrders());
         }
 
-        @GetMapping("/history")
-        public ResponseEntity<List<Order>> getOrderHistory() {
-            return ResponseEntity.ok(orderService.getOrderHistory());
-        }
+        // @GetMapping("/history")
+        // public ResponseEntity<List<Order>> getOrderHistory() {
+        //     return ResponseEntity.ok(orderService.getOrderHistory());
+        // }
+        
+@GetMapping("/user/{userId}/active")
+public List<Order> getUserActiveOrders(@PathVariable Long userId) {
+    return orderService.getUserActiveOrders(userId);
+}
+
+// Full order history
+@GetMapping("/user/{userId}/history")
+public List<Order> getUserOrderHistory(@PathVariable Long userId) {
+    return orderService.getUserOrderHistory(userId);
+}
+
 
         @PutMapping("/update/{id}")
         public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order updatedOrder) {
