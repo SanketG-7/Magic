@@ -36,6 +36,15 @@ public class OrderService {
             return orderRepository.save(order);
         }).orElse(null);
     }
+    public List<Order> getUserActiveOrders(Long userId) {
+    List<String> excludedStatuses = List.of("CANCELLED", "DELIVERED");
+    return orderRepo.findByUserIdAndStatusNotIn(userId, excludedStatuses);
+}
+
+public List<Order> getUserOrderHistory(Long userId) {
+    return orderRepo.findByUserId(userId);
+}
+
 
     public boolean cancelOrder(Long id) {
         return orderRepository.findById(id).map(order -> {
