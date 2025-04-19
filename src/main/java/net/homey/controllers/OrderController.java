@@ -16,11 +16,11 @@ import java.util.Optional;
     public class OrderController {
         @Autowired
         private OrderService orderService;
+@PostMapping("/place")
+public Order placeOrder(@RequestBody Order order) {
+    return orderService.placeOrder(order);
+}
 
-        @PostMapping("/place")
-        public ResponseEntity<Order> placeOrder(@RequestBody Order order) {
-            Order newOrder = orderService.placeOrder(order);
-            return ResponseEntity.ok(newOrder);
         }
 
         @GetMapping("/{id}")
